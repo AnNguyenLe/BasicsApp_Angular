@@ -1,0 +1,17 @@
+<p-menubar [model]="navBarItems()">
+  <ng-template pTemplate="start">
+    <a href="#">
+      <span>Cyanist</span>
+    </a>
+  </ng-template>
+  <!-- @if (isLoggedIn()) {} -->
+  <ng-template pTemplate="item" let-item let-root="root">
+    <a pRipple class="flex align-items-center p-menuitem-link">
+      <span class="ml-2">{{ item.label }}</span>
+    </a>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <p-button routerLink="/sign-in" label="Sign In" [link]="true" />
+    <p-button routerLink="/sign-up" label="Sign Up" [link]="true" />
+  </ng-template>
+</p-menubar>

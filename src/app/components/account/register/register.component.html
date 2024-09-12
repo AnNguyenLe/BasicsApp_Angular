@@ -1,0 +1,56 @@
+<p-toast key="registrationResult"/>
+<div class="register-form">
+  <h3>Sign Up</h3>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <p-floatLabel>
+      <input pInputText id="firstName" formControlName="firstName" />
+      <label for="firstName">First name</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input pInputText id="lastName" formControlName="lastName" />
+      <label for="lastName">Last name</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <p-calendar
+        styleClass="date-picker"
+        inputId="dateOfBirth"
+        formControlName="dateOfBirth"
+        dateFormat="yy-mm-dd"
+        showIcon="true"
+      ></p-calendar>
+      <label for="dateOfBirth">Date of Birth</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input pInputText id="email" formControlName="email" />
+      <label for="email">Email</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input
+        pInputText
+        id="password"
+        type="password"
+        formControlName="password"
+      />
+      <label for="password">Password</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input
+        pInputText
+        id="confirmPassword"
+        type="password"
+        formControlName="confirmPassword"
+      />
+      <label for="confirmPassword">Confirm Password</label>
+    </p-floatLabel>
+    <p-button type="submit" label="Register" />
+    <p-button
+      routerLink="/sign-in"
+      label="Already have an account? Sign In!"
+      [link]="true"
+    />
+  </form>
+</div>
+<p-messages [(value)]="messages" />
+<div>
+  <router-outlet />
+</div>

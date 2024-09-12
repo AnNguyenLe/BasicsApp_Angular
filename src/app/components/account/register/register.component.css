@@ -1,0 +1,24 @@
+.register-form {
+  height: 700px;
+  padding: 10px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form {
+  height: 580px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input {
+  width: 280px;
+}
+
+::ng-deep .date-picker{
+    width: 280px;
+}
