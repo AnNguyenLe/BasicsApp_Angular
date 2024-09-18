@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { NavComponent } from './components/nav/nav.component';
+import { AppStore } from './stores/app.store';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,9 @@ import { NavComponent } from './components/nav/nav.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  title = 'auth-frontend';
+export class AppComponent implements OnInit {
+  private appStore = inject(AppStore);
+  ngOnInit(): void {
+    this.appStore.loadUser();
+  }
 }

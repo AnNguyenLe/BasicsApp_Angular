@@ -16,6 +16,7 @@ import { ToastModule } from 'primeng/toast';
 import { ValidationProblemDetails } from '../../../models/errors/validation-problem-details.model';
 import { CalendarModule } from 'primeng/calendar';
 import { MessagesModule } from 'primeng/messages';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-register',
@@ -31,6 +32,7 @@ import { MessagesModule } from 'primeng/messages';
     CalendarModule,
     ToastModule,
     MessagesModule,
+    LoadingSpinnerComponent,
   ],
   providers: [MessageService],
   templateUrl: './register.component.html',
@@ -75,11 +77,12 @@ export class RegisterComponent {
       .subscribe({
         next: () => {
           this.messageService.add({
-            severity: 'information',
-            summary:
+            severity: 'warn',
+            detail:
               'Please check your email and click confirm to finish the registration process.',
-            detail: 'ACTION REQUIRED',
+            summary: 'ACTION REQUIRED',
           });
+          this.isLoading.set(false);
         },
         error: ({
           title: summary,
@@ -104,10 +107,9 @@ export class RegisterComponent {
             summary,
             detail,
           });
+          this.isLoading.set(false);
         },
       });
-
-    this.isLoading.set(false);
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();

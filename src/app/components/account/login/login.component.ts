@@ -10,6 +10,7 @@ import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-sp
 import { MessageService } from 'primeng/api';
 import { ProblemDetails } from '../../../models/errors/problem-details.model';
 import { LoginFormData } from '../../../models/account/login-form-data.model';
+import { AppStore } from '../../../stores/app.store';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +33,7 @@ export class LoginComponent {
   private destroyRef = inject(DestroyRef);
   private accountService = inject(AccountService);
   private messageService = inject(MessageService);
+  private appStore = inject(AppStore);
 
   isLoading = signal(false);
 
@@ -57,11 +59,13 @@ export class LoginComponent {
       .login(this.form.value as LoginFormData)
       .subscribe({
         next: (res) => {
+          this.appStore.setUser(res);
           this.messageService.add({
             severity: 'success',
             summary: `Welcome back ${res.firstName} ${res.lastName}!`,
             detail: 'Login Successfully.',
           });
+          this.isLoading.set(false);
         },
         error: ({ title: summary, detail }: ProblemDetails) => {
           this.messageService.add({
@@ -69,10 +73,9 @@ export class LoginComponent {
             summary,
             detail,
           });
+          this.isLoading.set(false);
         },
       });
-
-    this.isLoading.set(false);
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();

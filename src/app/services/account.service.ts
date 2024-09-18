@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AuthenticationResponse } from '../models/authentication-response.interface';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { ProblemDetails } from '../models/errors/problem-details.model';
 import { RegisterFormData } from '../models/account/register-form-data.model';
 import { LoginFormData } from '../models/account/login-form-data.model';
@@ -16,7 +16,6 @@ export class AccountService {
   private dateHelper = inject(DateHelper);
 
   baseUrl = 'https://localhost:7131/api/v1/account';
-
   login({ email, password }: LoginFormData) {
     return this.httpClient
       .post<AuthenticationResponse>(`${this.baseUrl}/login`, {
@@ -44,6 +43,12 @@ export class AccountService {
         confirmPassword,
       })
       .pipe(catchError(this.handleValidationError));
+  }
+
+  logout() {
+    return this.httpClient
+      .get(`${this.baseUrl}/logout`)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(errorRes: HttpErrorResponse) {

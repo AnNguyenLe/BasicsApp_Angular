@@ -1,4 +1,4 @@
-<p-toast />
+<p-toast [life]="800" />
 <div class="login-form">
   <h3>Sign In</h3>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -20,8 +20,14 @@
       label="I forgot my password"
       [link]="true"
     />
-    <p-button type="submit" label="Sign In" [disabled]="isLoading()" />
-    @if(isLoading()){
+    <button
+      pButton
+      type="submit"
+      label="Sign In"
+      [disabled]="isLoading()"
+      [loading]="isLoading()"
+    ></button>
+    @if (isLoading()) {
     <app-loading-spinner />
     }
     <p-button

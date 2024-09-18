@@ -1,4 +1,4 @@
-<p-toast key="registrationResult"/>
+<p-toast key="registrationResult" />
 <div class="register-form">
   <h3>Sign Up</h3>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -42,13 +42,22 @@
       />
       <label for="confirmPassword">Confirm Password</label>
     </p-floatLabel>
-    <p-button type="submit" label="Register" />
-    <p-button
-      routerLink="/sign-in"
-      label="Already have an account? Sign In!"
-      [link]="true"
-    />
+    <button
+      pButton
+      type="submit"
+      label="Sign Up"
+      [disabled]="isLoading()"
+      [loading]="isLoading()"
+    ></button>
   </form>
+  @if(isLoading()){
+  <app-loading-spinner />
+  }
+  <p-button
+    routerLink="/sign-in"
+    label="Already have an account? Sign In!"
+    [link]="true"
+  />
 </div>
 <p-messages [(value)]="messages" />
 <div>

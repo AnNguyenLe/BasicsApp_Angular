@@ -3,6 +3,6 @@ export interface AuthenticationResponse {
   lastName: string;
   email: string;
   accessToken: string;
-  expiryOfAccessToken: Date;
+  expiryOfAccessToken: string;
   refreshToken: string;
 }
